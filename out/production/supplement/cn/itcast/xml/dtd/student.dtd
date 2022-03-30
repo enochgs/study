@@ -1,0 +1,6 @@
+<!ELEMENT students (student+)>   <!--通过ELEMENT定义标签:students，(student*)：students下放子标签，可以出现*次-->
+  <!ELEMENT student (name,age,sex)>   <!--又定义了student标签，有：(name,age,sex)：声明student标签，按顺序依次用name，gage，sex子标签(且出现一次)-->
+  <!ELEMENT name (#PCDATA)>   <!--声明name标签，它的标签体内是：(#PCDATA)：字符串类型-->
+  <!ELEMENT age (#PCDATA)>
+  <!ELEMENT sex (#PCDATA)>
+  <!ATTLIST student number ID #REQUIRED>  <!--通过ATTLIST定义属性，定义stedent的属性，属性名number；属性类型：ID，属性名唯一；#REQUIRED：number属性必须出现-->

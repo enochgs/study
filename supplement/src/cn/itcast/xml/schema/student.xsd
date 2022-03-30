@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+
+<xsd:schema xmlns="http://www.itcast.cn/xml"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.itcast.cn/xml" elementFormDefault="qualified">
+  <!-- 定义xsd元素students，类型studentsType(自定义的) -->
+  <xsd:element name="students" type="studentsType"/>
+  <!-- 定义复杂类型元素，类型studentsType(自定义的) -->
+  <xsd:complexType name="studentsType">
+    <!-- sequence标签定义按顺序出现（下面的student元素） -->
+    <xsd:sequence>
+      <!-- 定义student元素，类型是studentsType，minOccurs最少出现0次，maxOccurs最多出现任意次-->
+      <xsd:element name="student" type="studentType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- complex复杂类型元素，类型studentType(自定义的) -->
+  <xsd:complexType name="studentType">
+    <!-- 按顺序出现name,age,sex元素-->
+    <xsd:sequence>
+      <!-- 定义name元素，类型是字符串类型-->
+      <xsd:element name="name" type="xsd:string"/>
+      <!-- 定义age元素，类型是自定义的age类型-->
+      <xsd:element name="age" type="ageType"/>
+      <!-- 定义age元素，类型是自定义的sex类型-->
+      <xsd:element name="sex" type="sexType"/>
+    </xsd:sequence>
+    <xsd:attribute name="number" type="numberType" use="required"/>
+  </xsd:complexType>
+
+  <!-- simple简单类型，定义name="sexType" -->
+  <xsd:simpleType name="sexType">
+    <!--restriction约束，base基本格式是string串类型-->
+    <xsd:restriction base="xsd:string">
+    <!-- enumeration枚举，在value="male"和value="female"取其一-->
+      <xsd:enumeration value="male"/>
+      <xsd:enumeration value="female"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- simple简单类型，定义age类型 -->
+  <xsd:simpleType name="ageType">
+    <!--restriction约束，base基本格式是整型-->
+    <xsd:restriction base="xsd:integer">
+      <!-- 最小值取0-->
+      <xsd:minInclusive value="0"/>
+      <!-- 最大值取256-->
+      <xsd:maxInclusive value="256"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- simple简单类型，numbere类型 -->
+  <xsd:simpleType name="numberType">
+    <!--restriction约束，base基本格式是字符串-->
+    <xsd:restriction base="xsd:string">
+      <!--pattern组成格式必须叫heima_后跟4位数字   \d：数字-->
+      <xsd:pattern value="heima_\d{4}"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

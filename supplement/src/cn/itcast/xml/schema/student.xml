@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+	1.填写xml文档的根元素
+	2.引入xsi前缀. 2001版 Schema文档约束  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	3.引入xsd文件命名空间. 通过xsi引入对应的xsd文件地址，xsi:schemaLocation="http://www.itcast.cn/xml  student.xsd"，
+	  student.xsd是Schema文档文件路径，http://www.itcast.cn/xml是给前面路径起的名子，也称命名空间
+	4.给前面的命名空间起个前缀，为每一个xsd约束标签声明一个前缀,作为标识  xmlns:a="http://www.itcast.cn/xml"
+    用于引入了多个xsd约束文档的情况下，有很多xsd文档声明很多重名标签,所以要为每个命名空间起不同别名，
+    来区分标签引用的哪一个命名空间，如下：
+  <students   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="
+                        http://www.itcast.cn/xml  student.xsd
+                        http://www.itcast.cn/xml2  student2.xsd
+                        http://www.itcast.cn/xml3  student3.xsd"
+              xmlns:a="http://www.itcast.cn/xml"
+              xmlns:b="http://www.itcast.cn/xml2"
+>
+    <students>
+      <a:student number="heima_1234">
+        <a:name>Str</a:name>
+        <a:age>55</a:age>
+        <a:sex>male</a:sex>
+      </a:student>
+
+      <b:student number="heima_1234">
+        <b:name>Str2</b:name>
+        <b:age>55</b:age>
+        <b:sex>male</b:sex>
+      </b:student>
+
+    </students>
+    如若不声明前缀，则写法麻烦
+    <http://www.itcast.cn/xml:students>
+      <http://www.itcast.cn/xml:student number="heima_1234">
+        <http://www.itcast.cn/xml:name>Str</http://www.itcast.cn/xml:name>
+        <http://www.itcast.cn/xml:age>55</http://www.itcast.cn/xml:age>
+        <http://www.itcast.cn/xml:sex>male</http://www.itcast.cn/xml:sex>
+      </http://www.itcast.cn/xml:student>
+    </http://www.itcast.cn/xml:students>
+  5.命名空间也可以是空前缀，因为如本xml文件只引入一个xsd文档，每次写a: 也麻烦，所以声明空后缀：
+    xmlns="http://www.itcast.cn/xml" 如本xml的students中的写法
+ -->
+<students   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://www.itcast.cn/xml"
+            xsi:schemaLocation="http://www.itcast.cn/xml  student.xsd"
+>
+  <student number="heima_1234">
+    <name>Str</name>
+    <age>55</age>
+    <sex>male</sex>
+  </student>
+  <student number="heima_1234">
+    <name>Str1</name>
+    <age>55</age>
+    <sex>male</sex>
+  </student>
+
+</students>
