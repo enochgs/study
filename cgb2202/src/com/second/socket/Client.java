@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 /**
+ * 666
  * 聊天室客户端
  */
 public class Client {
