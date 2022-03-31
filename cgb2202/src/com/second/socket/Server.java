@@ -17,11 +17,11 @@ public class Server {
      * ServerSocket是运行在服务端上的。其主要有两个作用
      * 1：向服务端申请服务端口(客户端Socket就是通过这个端口与服务端建立连接的)
      * 2：监听服务端口，一旦客户端连接会立即创建一个Socket，通过该Socket与客户端交互
-     *
+     * <p>
      * 如果我们将Socket比喻为“电话”，那么ServiceSocket相当于“总机”
-     *
      */
     private ServerSocket serverSocket;  //申请服务端口，并监听来自客户端对此端口的连接，一旦连接就创建Socket与客户端交互
+
     public Server() {
         try {
                     /*
@@ -34,12 +34,13 @@ public class Server {
             System.out.println("正在启动服务端。。。。");
             serverSocket = new ServerSocket(8088); //申请一个固定的端口号
             System.out.println("服务端启动完毕！");
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
-    public void start(){
+
+    public void start() {
         try {
             /*
                 ServerSocket的accept方法是一个阻塞方法。
@@ -48,9 +49,12 @@ public class Server {
                 相当于是接电话的动作。
                 阻塞方法：调用后，程序就“卡住’不执行了。
              */
+
             System.out.println("等待客户端连接");
             Socket socket = serverSocket.accept();//接受连接,与该客户端(Socket实例)进行交互
             System.out.println("一个客户端连接了！");
+
+
             /*
                 通过socket获取的字节输入流读取客户端发送过来的消息（字节流）
              */
@@ -64,7 +68,7 @@ public class Server {
                 处于阻塞状态，直到对方发送过来一行字符串为止。
                 如果返回值为null，则表示对方断开了连接。
              */
-            while ((line= br.readLine())!=null) {
+            while ((line = br.readLine()) != null) {
                 System.out.println("客户端说:" + line);
             }
 
