@@ -3,6 +3,7 @@ package com.second.socket;
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 
 /**
  * 聊天室客户端
@@ -36,8 +37,6 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     /**
@@ -52,9 +51,26 @@ public class Client {
             OutputStreamWriter osw = new OutputStreamWriter(out, StandardCharsets.UTF_8);
             BufferedWriter bw = new BufferedWriter(osw);
             PrintWriter pw = new PrintWriter(bw, true);
-            pw.println("你好服务器！");
+            Scanner scanner = new Scanner(System.in);
+            while(true) {
+                String line = scanner.nextLine();
+                if("exit".equalsIgnoreCase(line)){
+                    break;
+                }
+                pw.println(line);
+            }
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                /*
+                    Socket提供了close方法，可以与远端计算机断开连接。
+                    该方法调用时，也会自动关闭通过它获取的输入流和输出流。
+                 */
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
     }

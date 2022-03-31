@@ -57,8 +57,16 @@ public class Server {
             InputStream is = socket.getInputStream();
             InputStreamReader isr = new InputStreamReader(is, StandardCharsets.UTF_8);
             BufferedReader br = new BufferedReader(isr);
-            String line = br.readLine();
-            System.out.println("客户端说："+line);
+            String line;
+             /*
+                这里的BufferedReader读取时低下连接的流是通过Socket获取的输入流，
+                当远端计算机还处于连接状态，但是暂时没有发送内容时，readLine方法会
+                处于阻塞状态，直到对方发送过来一行字符串为止。
+                如果返回值为null，则表示对方断开了连接。
+             */
+            while ((line= br.readLine())!=null) {
+                System.out.println("客户端说:" + line);
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
